@@ -1,5 +1,7 @@
 # CDBG-DR Fund Dashboard — GitHub Pages Edition
 
+https://kaifalu.github.io/HUD-CDBG-DR-Fund-Dashboard-Hierarchical/
+
 This package is the **browser-only GitHub Pages version** of the **CDBG-DR Fund Dashboard**. The dashboard explores HUD Community Development Block Grant–Disaster Recovery programs through financial, narrative, and geographic data. It does not run Python, Gradio, a database, or a web server after deployment. All filtering, aggregation, map preparation, narrative excerpt loading, and downloads run in the visitor's browser using static HTML, CSS, JavaScript, and prepared data assets.
 
 ## Public dashboard features
