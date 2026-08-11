@@ -1,0 +1,29 @@
+GITHUB PAGES LINK TEMPLATES
+===========================
+
+1. Create a repository:
+https://github.com/new
+
+Suggested repository name:
+cdbg-dr-fund-dashboard
+
+2. Open Pages settings after replacing the username placeholder:
+https://github.com/YOUR_GITHUB_USERNAME/cdbg-dr-fund-dashboard/settings/pages
+
+3. Normal project-site dashboard URL:
+https://YOUR_GITHUB_USERNAME.github.io/cdbg-dr-fund-dashboard/
+
+4. Generic templates for another repository name:
+https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY/settings/pages
+https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY/
+
+5. Special account-site URL when the repository is named exactly
+   YOUR_GITHUB_USERNAME.github.io:
+https://YOUR_GITHUB_USERNAME.github.io/
+
+PAGES SETTINGS
+==============
+Source: Deploy from a branch
+Branch: main
+Folder: /(root)
+Then select Save.

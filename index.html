@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive HUD CDBG-DR fund dashboard with hierarchical filtering, comparative analysis, geographic maps, funding timelines, narratives, and aggregate downloads.">
+  <title>CDBG-DR Fund Dashboard</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+  <noscript>
+    <div class="fatal-message">This dashboard requires JavaScript.</div>
+  </noscript>
+
+  <div id="loading-screen" class="loading-screen" role="status" aria-live="polite">
+    <div class="loading-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <h1>Loading CDBG-DR Fund Dashboard</h1>
+      <p id="loading-message">Preparing the browser-only data engine…</p>
+      <div class="progress-track"><div id="loading-progress" class="progress-bar"></div></div>
+      <p class="loading-note">The first visit loads the processed finance data into your browser. No Python server is required.</p>
+    </div>
+  </div>
+
+  <main id="app" class="app-shell" hidden>
+    <header class="page-header">
+      <div class="header-title-block">
+        <p class="eyebrow">STATIC GITHUB PAGES EDITION</p>
+        <h1>🌪️ CDBG-DR Fund Dashboard</h1>
+      </div>
+
+      <div class="dashboard-introduction" aria-label="CDBG-DR Fund Dashboard description">
+        <section class="intro-card intro-overview">
+          <h2>Dashboard Overview</h2>
+          <p>The <strong>CDBG-DR Fund Dashboard</strong> is an interactive web-based platform for exploring <strong>HUD Community Development Block Grant–Disaster Recovery (CDBG-DR)</strong> programs across the United States. It covers CDBG-DR funding associated with disasters and appropriations from <strong>2001 to 2023</strong>, representing <strong>18 disaster/appropriation categories across 40 states and U.S. territories</strong>.</p>
+        </section>
+
+        <section class="intro-card intro-functions">
+          <h2>Data and Functions</h2>
+          <p>The dashboard integrates project- and activity-level financial information, Quarterly Performance Report narratives, and geographic data. Users can apply <strong>seven hierarchical filters</strong>, compare two selected programs or locations side by side, and explore recovery activities at the <strong>state, county, city/place, and urban-area levels</strong>.</p>
+        </section>
+
+        <section class="intro-card intro-analysis">
+          <h2>Financial and Geographic Analysis</h2>
+          <p>Interactive visualizations allow users to examine quarterly and cumulative trends in obligated, expended, and disbursed CDBG-DR funds while linking financial performance with implementation narratives. Users can also download aggregated data and figures for additional analysis, reporting, and presentation purposes.</p>
+        </section>
+
+        <section class="intro-card intro-audiences">
+          <h2>Audiences and Applications</h2>
+          <p>The dashboard is designed for <strong>researchers, government agencies, CDBG-DR grantees, planners, policymakers, nonprofit organizations, students, and community stakeholders</strong>. Potential applications include disaster-recovery monitoring, funding and expenditure analysis, geographic and equity assessment, comparative program evaluation, implementation research, and disaster-recovery policy analysis.</p>
+        </section>
+      </div>
+
+      <div id="data-badges" class="data-badges" aria-label="Dataset summary"></div>
+    </header>
+
+    <div id="global-error" class="global-error" hidden></div>
+
+    <section id="panel-grid" class="panel-grid" aria-label="Dashboard comparison panels"></section>
+
+    <section class="method-notes">
+      <p><strong>Data and export notes.</strong> Financial values are source-quarter transactions, so cumulative curves are chronological cumulative net sums and may decline when a reversal, correction, or deobligation occurs. Aggregate downloads contain summarized quarter-by-geography records, not raw finance rows or raw full narrative text.</p>
+      <p><strong>City/place data attribution.</strong> City/place coordinates and primary-county attributes are derived from the user-supplied SimpleMaps U.S. Cities database. Census cartographic boundary files provide state, county, and 2010 urban-area polygons.</p>
+      <p><strong>Static-site limitation.</strong> GitHub Pages is public static hosting. This edition intentionally performs all filtering and aggregation in the visitor’s browser and cannot provide server-side authentication.</p>
+    </section>
+
+    <footer class="site-footer">
+      <span id="build-stamp"></span>
+      <span>CDBG-DR Fund Dashboard · Browser-only GitHub Pages application</span>
+    </footer>
+  </main>
+
+  <script src="./assets/vendor/plotly-3.3.1.min.js"></script>
+  <script src="./data/bootstrap.js"></script>
+  <script src="./assets/app.js"></script>
+</body>
+</html>
