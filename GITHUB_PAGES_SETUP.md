@@ -1,182 +1,112 @@
-# GitHub Pages setup guide
+# GitHub Pages Setup
 
-This guide publishes the dashboard through the same GitHub workflow used for a
-normal branch-based static site: **Settings → Pages → Deploy from a branch →
-main → /(root)**.
+## Recommended repository
 
-## 1. Download and extract the correct package
+A suggested public repository name is:
 
-Use `cdbg_dr_fund_dashboard_github_pages_deployment_v4.zip`. Extract it before
-uploading. The ZIP is only a transport container; GitHub Pages cannot serve the
-dashboard when the whole website remains inside one ZIP file.
+```text
+HUD-CDBG-DR-Fund-Dashboard-Hierarchical
+```
 
-After extraction, verify that you can see:
+The resulting project-site pattern is:
+
+```text
+https://YOUR_GITHUB_USERNAME.github.io/HUD-CDBG-DR-Fund-Dashboard-Hierarchical/
+```
+
+## Upload the correct files
+
+Extract the deployment ZIP. Open the extracted dashboard folder and upload **its contents**, not the ZIP itself and not the enclosing folder.
+
+The repository root must directly contain:
 
 ```text
 index.html
 .nojekyll
 assets/
 data/
+docs/
+scripts/
 README.md
 ```
 
-## 2. Create a public repository
+An incorrect nested structure such as the following will cause a Pages 404 when `/(root)` is selected:
 
-Open:
-
-`https://github.com/new`
-
-A suggested repository name is:
-
-`cdbg-dr-fund-dashboard`
-
-Set the repository visibility to **Public**. A project Pages site normally uses
-the repository name in its URL.
-
-## 3A. Upload through the GitHub website
-
-1. Open the empty repository.
-2. Choose **Add file → Upload files**.
-3. Drag the extracted files and folders into the upload area. Upload the
-   contents of the extracted folder, not the outer folder and not the ZIP.
-4. Confirm that `index.html` appears at the repository root.
-5. Enter a commit message such as `Add GitHub Pages dashboard` and commit to
-   `main`.
-
-Every deployable file in this package is under 5 MB, making the package suitable
-for ordinary Git-based or browser-based repository upload. If the browser upload
-is interrupted, use the Git method below.
-
-## 3B. Push the supplied Git bundle instead
-
-The separate file `cdbg_dr_fund_dashboard_github_pages_v4.git.bundle` is a portable
-committed repository.
-
-```bash
-git clone cdbg_dr_fund_dashboard_github_pages_v4.git.bundle cdbg-dr-fund-dashboard
-cd cdbg-dr-fund-dashboard
-git remote remove origin
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY.git
-git push -u origin main
+```text
+repository/
+  cdbg_dr_fund_dashboard_github_pages_v5/
+    index.html
 ```
 
-Replace both placeholders with your actual account and repository names.
+The correct structure is:
 
-## 4. Open the repository's Pages settings
+```text
+repository/
+  index.html
+  assets/
+  data/
+```
 
-Use this direct template after replacing the placeholders:
+## Enable Pages
 
-`https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY/settings/pages`
-
-Or navigate manually:
-
-1. Open the repository.
+1. Open the GitHub repository.
 2. Select **Settings**.
-3. In the left navigation, select **Pages** under **Code and automation**.
+3. Select **Pages** in the left navigation.
+4. Under **Build and deployment**, choose:
+   - **Source:** Deploy from a branch
+   - **Branch:** main
+   - **Folder:** /(root)
+5. Select **Save**.
 
-If the Settings tab is hidden, confirm that you are signed in to an account with
-administrator permission for the repository. On a narrow window, repository
-tabs may be inside an overflow menu.
-
-## 5. Select branch-based publishing
-
-Under **Build and deployment** configure:
-
-```text
-Source: Deploy from a branch
-Branch: main
-Folder: /(root)
-```
-
-Select **Save**.
-
-The package includes `.nojekyll`, so GitHub publishes the static folders and
-files directly without Jekyll processing.
-
-## 6. Open the public site
-
-For a normal project repository, use:
-
-`https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY/`
-
-Example only:
+The direct settings pattern is:
 
 ```text
-Repository: https://github.com/example-user/cdbg-dr-fund-dashboard
-Dashboard:  https://example-user.github.io/cdbg-dr-fund-dashboard/
+https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY/settings/pages
 ```
 
-For the special account-site repository named exactly
-`YOUR_GITHUB_USERNAME.github.io`, use:
+## Update an existing repository
 
-`https://YOUR_GITHUB_USERNAME.github.io/`
+Delete or overwrite obsolete dashboard files, especially old `index.html`, `assets/app.js`, `assets/app.css`, `data/bootstrap.js`, old `data/rows/`, and any prior `data/narratives/` directory. Upload the entire revised deployment package so the code and data schemas remain synchronized.
 
-The exact address also appears at the top of the repository's Pages settings
-after deployment completes.
+After committing the update, check the repository's **Actions** tab for the Pages deployment. A green deployment indicates that GitHub completed the publication process.
 
-## 7. Verify the published file structure
+## One-file alternative
 
-A correct repository root should look like:
+The deployment package also contains:
 
 ```text
-index.html
-.nojekyll
-assets/app.css
-assets/app.js
-assets/vendor/plotly-3.3.1.min.js
-data/bootstrap.js
-data/rows/...
-data/narratives/...
-data/geography/...
+HUD-CDBG-DR-Fund-Dashboard-Hierarchical.html
 ```
 
-The dashboard uses relative paths, so it works both at an account root and in a
-project subpath.
-
-## Updating the dashboard later
-
-Replace modified files, commit to `main`, and push. GitHub Pages republishes the
-branch. Keep the same relative folder structure. Do not rename `data`, `assets`,
-or the JavaScript chunks unless you also rebuild `data/bootstrap.js`.
+This is a self-contained edition. It can be opened locally after download. For a one-file Pages deployment, copy it to the repository root and rename it `index.html`. The multi-file edition is recommended for faster repository updates and more efficient browser caching.
 
 ## Troubleshooting
 
-### Pages displays the README instead of the dashboard
+### 404 page
 
-`index.html` is not at the selected publishing root. Move it to the repository
-root or change the Pages folder to the location that contains it.
+Confirm that `index.html` is at the selected publishing root and that the repository/branch names match the Pages configuration.
 
-### The site returns 404
+### Blank page or loading error
 
-Confirm that:
+Upload the complete `assets/` and `data/` directories. Do not mix files from different package versions. Open the browser developer console and look for a missing JavaScript file.
 
-- the repository is public or your plan supports private Pages;
-- Pages source is `Deploy from a branch`;
-- branch is `main`;
-- folder is `/(root)`;
-- the public URL includes the repository name for a project site;
-- the latest Pages deployment has completed.
+### Dashboard opens but report/map is unavailable
 
-### The dashboard says a data file failed to load
+Use a current browser with JavaScript and hardware acceleration enabled. State, county, and urban-area polygons load on demand. City/place maps use matched points.
 
-The folder structure changed or not all files were uploaded. Compare the
-repository against `PACKAGE_MANIFEST.md`, especially `data/rows`,
-`data/narratives`, and `data/geography`.
+### Changes are not visible
 
-### The map reports that WebGL is unavailable
+Wait for the Pages deployment to complete, then hard-refresh the page (`Ctrl+F5` or `Cmd+Shift+R`).
 
-Open the dashboard in a current Chrome, Edge, Firefox, or Safari browser and
-enable browser hardware acceleration. Other dashboard functions continue to
-work without the map.
+### Large browser upload fails
 
-### The initial load is slow
+Use Git from the command line instead of GitHub's browser uploader:
 
-The static edition loads roughly 13 MB of compact finance chunks plus the local
-Plotly library on first use. Narrative and polygon assets load later, on demand.
-Browser and GitHub/CDN caching make repeat visits faster.
-
-### A custom domain is required
-
-First confirm the default `github.io` site works. Then add the domain in the
-Pages settings and configure the domain's DNS exactly as GitHub instructs.
-Custom-domain ownership and DNS cannot be completed by this package alone.
+```bash
+git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY.git
+cd YOUR_REPOSITORY
+# Copy the extracted deployment contents here.
+git add .
+git commit -m "Deploy revised CDBG-DR Fund Dashboard"
+git push origin main
+```

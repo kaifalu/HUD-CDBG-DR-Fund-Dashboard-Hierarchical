@@ -1,43 +1,37 @@
-# Package manifest
+# Package Manifest
 
-## Purpose
+## GitHub Pages deployment package
 
-This folder is the deployable GitHub Pages site. Upload its contents to a
-repository root and publish `main` from `/(root)`.
+This is the package intended for a public GitHub repository.
 
-## Required runtime files
+- `index.html` — application structure, dashboard description, Quick Report controls, and Explore & Compare container.
+- `.nojekyll` — prevents Jekyll processing.
+- `assets/app.css` — responsive interface and print styling.
+- `assets/app.js` — financial filtering, aggregation, Quick Report generation, maps, plots, and downloads.
+- `assets/vendor/plotly-3.3.1.min.js` — bundled visualization library.
+- `data/bootstrap.js` — dictionaries, metadata, column positions, chunk manifests, and geography metadata.
+- `data/rows/*.js` — compact quarter-level financial rows with no narrative fields.
+- `data/geography/*.js` — state, county, and urban-area map assets.
+- `HUD-CDBG-DR-Fund-Dashboard-Hierarchical.html` — optional fully self-contained one-file edition.
+- `scripts/prepare_financial_geography.py` — joins the raw financial CSV to the prepared activity geography crosswalk and creates the processed financial file.
+- `scripts/build_static_data.py` — rebuilds static assets from processed financial/geographic data.
+- `scripts/build_self_contained.py` — rebuilds the one-file HTML edition.
+- `scripts/validate_static_package.py` — validates package structure and data integrity.
+- `docs/` — previews and machine-readable validation outputs.
+- Markdown files — setup, operation, methods, notices, and revision documentation.
 
-- `index.html` — dashboard entry point.
-- `.nojekyll` — direct static publishing marker.
-- `assets/app.css` — responsive presentation.
-- `assets/app.js` — filtering, aggregation, maps, plots, narratives, downloads.
-- `assets/vendor/plotly-3.3.1.min.js` — local chart/map library.
-- `data/bootstrap.js` — dictionaries, metadata, schema, and chunk manifests.
-- `data/rows/*.js` — compact finance row chunks.
-- `data/narratives/*.js` — on-demand narrative excerpt chunks.
-- `data/geography/state.js` — minified state boundaries.
-- `data/geography/county.js` — minified county/county-equivalent boundaries.
-- `data/geography/urban.js` — minified 2010 Census urban-area boundaries.
+## Complete reproduction package
 
-## Reproduction and QA files
+The complete package contains:
 
-- `scripts/build_static_data.py` — converts the processed server edition into
-  static assets.
-- `scripts/validate_static_package.py` — validates the prepared Pages package.
-- `data/metadata.json` — source counts, coverage, methods, and input hashes.
-- `data/STATIC_DATA_SCHEMA.md` — compact schema explanation.
-- Markdown guides and notices in the repository root.
-- `docs/dashboard_interface_preview.png` — browser smoke-test preview.
-- `docs/browser_smoke_test_v4.json` — machine-readable results from the revised desktop and mobile browser QA.
-- `REVISION_NOTES_V4.md` — summary of the CDBG-DR branding and header revision.
+- the full GitHub Pages deployment website;
+- non-narrative source inputs used for financial and geographic processing;
+- processed non-narrative financial and geographic reference files;
+- geographic matching quality-assurance outputs when available; and
+- build, validation, documentation, and checksum files.
 
-## Files intentionally excluded from the deployment package
+The complete package is for controlled reproduction and should not automatically be uploaded to a public repository. Review source-data licenses and redistribution requirements first.
 
-- raw source financial and narrative CSV files;
-- raw Census shapefile ZIP archives;
-- raw U.S. cities CSV;
-- server-side SQLite narrative database;
-- Gradio/Python runtime application;
-- Render/Docker deployment configuration.
+## Files intentionally excluded
 
-Those materials are included in the separate complete reproduction package.
+This edition excludes all QPR narrative CSV files, processed narrative tables, narrative databases, narrative JavaScript chunks, narrative identifiers, and narrative excerpts.

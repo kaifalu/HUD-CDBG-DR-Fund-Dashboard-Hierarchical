@@ -1,15 +1,55 @@
-# CDBG-DR Fund Dashboard user guide
+# CDBG-DR Fund Dashboard User Guide
 
-## Two-panel comparison
+## 1. Choose an interaction mode
 
-Panel 1 and Panel 2 are independent. Use them to compare different disaster
-types, time periods, grantees, programs, activity categories, geographic
-levels, geographic scopes, financial measures, and cumulative versus quarterly
-patterns.
+The dashboard opens in **Quick Report** mode. Select **Explore & Compare** when you need the full two-panel analytical interface.
 
-## Seven hierarchical filters
+## 2. Quick Report
 
-The filters are:
+### Step 1 — Select report type
+
+- **Single-area report** summarizes one geographic and program selection.
+- **Comparison report** compares Scenario A with Scenario B using the same geographic level and financial measure. The scenarios may differ by location, reporting period, disaster, grantee, project, or activity type.
+
+### Step 2 — Select shared settings
+
+Choose a geographic level, one financial measure, and a trend basis:
+
+- **Quarterly net** displays source-quarter transactions.
+- **Cumulative net** displays their chronological running total.
+
+Available measures are funds obligated, funds expended, grant disbursed, activity program income disbursed, and activity program income received.
+
+### Step 3 — Define Scenario A
+
+Choose a location and time horizon. Presets include all reporting periods and the latest one, three, or five years. Select **Custom QPR-quarter range** to set exact start and end quarters.
+
+Open **More filters** to narrow the report by disaster/appropriation year, disaster type, grantee, project, or activity type. Project choices become available after a grantee is selected.
+
+### Step 4 — Define Scenario B when comparing
+
+Scenario B appears when **Comparison report** is selected. It uses Scenario A's time horizon by default. Clear **Use Scenario A time horizon** to define a different reporting period.
+
+### Step 5 — Generate and export
+
+Select **Generate one-page report**. The generated decision brief includes:
+
+- four summary indicators;
+- a map of the selected measure or the Scenario B minus Scenario A difference;
+- a quarterly or cumulative funding trend;
+- a top-five ranking;
+- up to four automatically generated, rule-based takeaways; and
+- financial and geographic interpretation notes.
+
+Exports:
+
+- **Download report PNG** creates a high-resolution image.
+- **Print / Save as PDF** opens a print-ready landscape page. Choose the browser's PDF destination.
+- **Download report data CSV** saves the aggregate report inputs, time series, ranking, takeaways, and methodology notes.
+
+## 3. Explore & Compare
+
+Each panel has independent controls. Select values in the following order:
 
 1. Year
 2. Disaster Type
@@ -19,76 +59,30 @@ The filters are:
 6. Activity Type
 7. Activity Title
 
-Downstream choices update after every selection. To prevent extremely long
-menus, Project, Responsible Organization, and Activity Type activate after a
-Grantee is selected. Activity Title activates after at least one Project,
-Organization, or Activity Type is selected.
+Downstream choices update after an upstream filter changes. Each panel also provides:
 
-## Narrative filtering and narrative excerpts
+- geographic level and geographic scope;
+- a map measure;
+- five selectable timeline measures;
+- quarterly or cumulative timeline basis;
+- dynamic indicators; and
+- aggregate CSV, map PNG, and timeline PNG downloads.
 
-Selecting **Only show records with nonempty narratives** retains only finance
-rows with an exact narrative link for the same Grant, Activity Number, and QPR
-quarter. It is not approximate text matching.
+The two panels do not force identical selections, allowing comparison across locations, disasters, grantees, projects, activities, and reporting periods.
 
-Open **Linked narrative records** to load up to 40 recent narrative excerpts for
-the active selection. The static public package stores excerpts up to 1,400
-characters and loads them by year on demand. The aggregate CSV excludes raw
-narrative text.
+## 4. Geographic interpretation
 
-## Geographic views
+- **State** is assigned directly from the grantee state.
+- **County/county-equivalent** combines direct county evidence with city-derived primary-county assignments.
+- **City/place** is a matched point from the supplied cities database, not a municipal boundary.
+- **Urban area** uses the 2010 Census urban-area layer as a secondary analytical geography.
 
-- **State:** direct state/territory assignment; 100% coverage.
-- **County/county-equivalent:** direct county evidence plus city-primary-county
-  inference; 65.68% finance-row coverage.
-- **City/populated place:** matched point locations from the supplied U.S.
-  cities data; 37.39% finance-row coverage. Points are not municipal polygons.
-- **2010 Census urban area:** secondary urban-area polygons; 29.69% finance-row
-  coverage.
+Quick Reports display mapping coverage for the active nongeographic filters. Unmapped records are excluded from county, city/place, and urban-area maps and geographic totals.
 
-Selecting a specific geography filters the KPIs, map, funding plot, narratives,
-and aggregate download consistently. Unmapped records are excluded when a
-county, city/place, or urban-area view is selected, and mapping coverage is
-shown in the KPI cards.
+## 5. Empty or unexpected results
 
-## Financial measures
+A zero value may mean that no records match the combined filters or that source-quarter transactions net to zero. Broaden the location, time horizon, or optional filters. For county, city/place, and urban-area analysis, also review the displayed mapping coverage.
 
-The funding plot can display any combination of:
+## 6. Browser recommendations
 
-- QPR Funds Obligated
-- QPR Fund Expended
-- QPR Grant Disbursed
-- QPR Activity Program Income Disbursed
-- QPR Activity Program Income Received
-
-The map uses one selected measure. **Quarterly** plots source-quarter
-transactions. **Cumulative** plots chronological cumulative net sums; a line
-may fall after a correction, reversal, or deobligation.
-
-## Downloads
-
-### Aggregate CSV
-
-The browser creates one CSV containing summarized quarter-by-geography values
-for the active mapped selection. It includes:
-
-- active filter and geography labels;
-- quarter;
-- geography name;
-- record, grant, project, and activity counts;
-- narrative-linked record count and share;
-- match-method and confidence information where applicable;
-- quarterly and cumulative values for selected financial metrics.
-
-It does not contain raw source rows or raw full narrative text.
-
-### Map PNG and funding-plot PNG
-
-Plotly generates PNG files in the browser from the current view. The map export
-requires WebGL. Browser download or pop-up restrictions may require permission
-the first time.
-
-## Performance
-
-Initial loading processes 128,382 finance rows in the browser. Keep the tab open
-while the progress screen is visible. State/county/urban boundaries and annual
-narrative excerpts load only when requested.
+Use a current Chrome, Edge, Firefox, or Safari browser with JavaScript and hardware acceleration enabled. The first visit loads the prepared financial data into browser memory and may take several seconds.

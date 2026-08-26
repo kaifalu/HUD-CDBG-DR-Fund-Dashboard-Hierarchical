@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Interactive HUD CDBG-DR fund dashboard with hierarchical filtering, comparative analysis, geographic maps, funding timelines, narratives, and aggregate downloads.">
+  <meta name="description" content="Interactive HUD CDBG-DR financial and geographic dashboard with a one-page Quick Report decision tool, hierarchical filtering, comparative analysis, maps, timelines, and aggregate downloads.">
   <title>CDBG-DR Fund Dashboard</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./assets/app.css">
@@ -19,7 +19,7 @@
       <h1>Loading CDBG-DR Fund Dashboard</h1>
       <p id="loading-message">Preparing the browser-only data engine…</p>
       <div class="progress-track"><div id="loading-progress" class="progress-bar"></div></div>
-      <p class="loading-note">The first visit loads the processed finance data into your browser. No Python server is required.</p>
+      <p class="loading-note">The first visit loads the processed financial data into your browser. No Python server is required.</p>
     </div>
   </div>
 
@@ -38,17 +38,17 @@
 
         <section class="intro-card intro-functions">
           <h2>Data and Functions</h2>
-          <p>The dashboard integrates project- and activity-level financial information, Quarterly Performance Report narratives, and geographic data. Users can apply <strong>seven hierarchical filters</strong>, compare two selected programs or locations side by side, and explore recovery activities at the <strong>state, county, city/place, and urban-area levels</strong>.</p>
+          <p>The dashboard integrates project- and activity-level financial information with geographic data. Users can create a simplified <strong>one-page decision report</strong>, apply <strong>seven hierarchical filters</strong>, compare two programs or locations, and explore recovery activities at the <strong>state, county, city/place, and urban-area levels</strong>.</p>
         </section>
 
         <section class="intro-card intro-analysis">
           <h2>Financial and Geographic Analysis</h2>
-          <p>Interactive visualizations allow users to examine quarterly and cumulative trends in obligated, expended, and disbursed CDBG-DR funds while linking financial performance with implementation narratives. Users can also download aggregated data and figures for additional analysis, reporting, and presentation purposes.</p>
+          <p>Interactive visualizations allow users to examine quarterly and cumulative trends in obligated, expended, and disbursed CDBG-DR funds. Users can also download decision reports, aggregate data, maps, and funding figures for analysis, reporting, and presentation purposes.</p>
         </section>
 
         <section class="intro-card intro-audiences">
           <h2>Audiences and Applications</h2>
-          <p>The dashboard is designed for <strong>researchers, government agencies, CDBG-DR grantees, planners, policymakers, nonprofit organizations, students, and community stakeholders</strong>. Potential applications include disaster-recovery monitoring, funding and expenditure analysis, geographic and equity assessment, comparative program evaluation, implementation research, and disaster-recovery policy analysis.</p>
+          <p>The dashboard is designed for <strong>researchers, government agencies, CDBG-DR grantees, planners, policymakers, nonprofit organizations, students, and community stakeholders</strong>. Potential applications include disaster-recovery monitoring, funding and expenditure analysis, geographic and equity assessment, comparative program evaluation, implementation research, and policy analysis.</p>
         </section>
       </div>
 
@@ -57,12 +57,175 @@
 
     <div id="global-error" class="global-error" hidden></div>
 
-    <section id="panel-grid" class="panel-grid" aria-label="Dashboard comparison panels"></section>
+    <nav class="mode-switcher" aria-label="Dashboard interaction mode">
+      <button id="mode-tab-quick" class="mode-tab active" type="button" data-mode="quick" aria-controls="quick-report-view" aria-selected="true">
+        <span class="mode-tab-title">Quick Report</span>
+        <span class="mode-tab-note">Turn a few choices into a one-page decision brief</span>
+      </button>
+      <button id="mode-tab-explore" class="mode-tab" type="button" data-mode="explore" aria-controls="explore-view" aria-selected="false">
+        <span class="mode-tab-title">Explore &amp; Compare</span>
+        <span class="mode-tab-note">Use the full seven-tier analytical dashboard</span>
+      </button>
+    </nav>
 
-    <section class="method-notes">
-      <p><strong>Data and export notes.</strong> Financial values are source-quarter transactions, so cumulative curves are chronological cumulative net sums and may decline when a reversal, correction, or deobligation occurs. Aggregate downloads contain summarized quarter-by-geography records, not raw finance rows or raw full narrative text.</p>
-      <p><strong>City/place data attribution.</strong> City/place coordinates and primary-county attributes are derived from the user-supplied SimpleMaps U.S. Cities database. Census cartographic boundary files provide state, county, and 2010 urban-area polygons.</p>
-      <p><strong>Static-site limitation.</strong> GitHub Pages is public static hosting. This edition intentionally performs all filtering and aggregation in the visitor’s browser and cannot provide server-side authentication.</p>
+    <section id="quick-report-view" class="mode-view" aria-label="Quick Report decision tool">
+      <div class="quick-report-shell">
+        <header class="quick-report-heading">
+          <div>
+            <p class="section-kicker">DECISION-ORIENTED MODE</p>
+            <h2>Generate a One-Page CDBG-DR Funding Report</h2>
+            <p>Choose a report type, geography, time horizon, and one financial measure. The dashboard will summarize the selection in a printable single-page report with key indicators, a map, funding trends, a top-five ranking, and rule-based takeaways.</p>
+          </div>
+          <span class="quick-report-badge">NO DATA ANALYSIS EXPERIENCE REQUIRED</span>
+        </header>
+
+        <div class="quick-report-workspace">
+          <aside class="quick-report-controls" aria-label="Quick Report controls">
+            <div class="quick-step">
+              <div class="quick-step-number">1</div>
+              <div class="quick-step-content">
+                <label for="qr-report-type">Report type</label>
+                <select id="qr-report-type">
+                  <option value="single">Single-area report</option>
+                  <option value="comparison">Comparison report</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="quick-step">
+              <div class="quick-step-number">2</div>
+              <div class="quick-step-content quick-shared-grid">
+                <div class="quick-field">
+                  <label for="qr-geo-level">Geographic level</label>
+                  <select id="qr-geo-level"></select>
+                </div>
+                <div class="quick-field">
+                  <label for="qr-metric">Financial measure</label>
+                  <select id="qr-metric"></select>
+                </div>
+                <div class="quick-field">
+                  <label for="qr-plot-basis">Trend basis</label>
+                  <select id="qr-plot-basis">
+                    <option value="cumulative">Cumulative net</option>
+                    <option value="quarterly">Quarterly net</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="quick-scenario-card scenario-a" id="qr-scenario-a-card">
+              <div class="quick-scenario-title"><span>Scenario A</span><strong id="qr-a-caption">Primary selection</strong></div>
+              <div class="quick-scenario-grid">
+                <div class="quick-field full">
+                  <label for="qr-a-location">Location</label>
+                  <select id="qr-a-location"><option value="-1">All mapped geographies</option></select>
+                </div>
+                <div class="quick-field full">
+                  <label for="qr-a-time-preset">Time horizon</label>
+                  <select id="qr-a-time-preset">
+                    <option value="all">All available reporting periods</option>
+                    <option value="1y">Latest 1 year</option>
+                    <option value="3y">Latest 3 years</option>
+                    <option value="5y">Latest 5 years</option>
+                    <option value="custom">Custom QPR-quarter range</option>
+                  </select>
+                </div>
+                <div id="qr-a-custom-range" class="quick-custom-range full" hidden>
+                  <div class="quick-field"><label for="qr-a-start">Start quarter</label><select id="qr-a-start"></select></div>
+                  <div class="quick-field"><label for="qr-a-end">End quarter</label><select id="qr-a-end"></select></div>
+                </div>
+              </div>
+              <details class="quick-more-filters" id="qr-a-more-filters">
+                <summary>More filters (optional)</summary>
+                <div class="quick-advanced-grid">
+                  <div class="quick-field"><label for="qr-a-filter-0">Disaster/appropriation year</label><select id="qr-a-filter-0"><option value="-1">All</option></select></div>
+                  <div class="quick-field"><label for="qr-a-filter-1">Disaster type</label><select id="qr-a-filter-1"><option value="-1">All</option></select></div>
+                  <div class="quick-field"><label for="qr-a-filter-2">Grantee</label><select id="qr-a-filter-2"><option value="-1">All</option></select></div>
+                  <div class="quick-field"><label for="qr-a-filter-3">Project</label><select id="qr-a-filter-3" disabled><option value="-1">Select a grantee first</option></select></div>
+                  <div class="quick-field full"><label for="qr-a-filter-5">Activity type</label><select id="qr-a-filter-5"><option value="-1">All</option></select></div>
+                </div>
+              </details>
+            </div>
+
+            <div class="quick-scenario-card scenario-b" id="qr-scenario-b-card" hidden>
+              <div class="quick-scenario-title"><span>Scenario B</span><strong>Comparison selection</strong></div>
+              <div class="quick-scenario-grid">
+                <div class="quick-field full">
+                  <label for="qr-b-location">Location</label>
+                  <select id="qr-b-location"><option value="-1">All mapped geographies</option></select>
+                </div>
+                <label class="compact-checkbox full"><input id="qr-b-use-a-time" type="checkbox" checked><span>Use Scenario A time horizon</span></label>
+                <div id="qr-b-time-controls" class="quick-scenario-grid full" hidden>
+                  <div class="quick-field full">
+                    <label for="qr-b-time-preset">Scenario B time horizon</label>
+                    <select id="qr-b-time-preset">
+                      <option value="all">All available reporting periods</option>
+                      <option value="1y">Latest 1 year</option>
+                      <option value="3y">Latest 3 years</option>
+                      <option value="5y">Latest 5 years</option>
+                      <option value="custom">Custom QPR-quarter range</option>
+                    </select>
+                  </div>
+                  <div id="qr-b-custom-range" class="quick-custom-range full" hidden>
+                    <div class="quick-field"><label for="qr-b-start">Start quarter</label><select id="qr-b-start"></select></div>
+                    <div class="quick-field"><label for="qr-b-end">End quarter</label><select id="qr-b-end"></select></div>
+                  </div>
+                </div>
+              </div>
+              <details class="quick-more-filters" id="qr-b-more-filters">
+                <summary>More filters (optional)</summary>
+                <div class="quick-advanced-grid">
+                  <div class="quick-field"><label for="qr-b-filter-0">Disaster/appropriation year</label><select id="qr-b-filter-0"><option value="-1">All</option></select></div>
+                  <div class="quick-field"><label for="qr-b-filter-1">Disaster type</label><select id="qr-b-filter-1"><option value="-1">All</option></select></div>
+                  <div class="quick-field"><label for="qr-b-filter-2">Grantee</label><select id="qr-b-filter-2"><option value="-1">All</option></select></div>
+                  <div class="quick-field"><label for="qr-b-filter-3">Project</label><select id="qr-b-filter-3" disabled><option value="-1">Select a grantee first</option></select></div>
+                  <div class="quick-field full"><label for="qr-b-filter-5">Activity type</label><select id="qr-b-filter-5"><option value="-1">All</option></select></div>
+                </div>
+              </details>
+            </div>
+
+            <div class="quick-control-actions">
+              <button id="qr-generate" class="action-button quick-primary" type="button">Generate one-page report</button>
+              <button id="qr-reset" class="action-button" type="button">Reset</button>
+            </div>
+            <p class="quick-control-note">County, city/place, and urban-area results include inferred geographic matches. Every generated report displays the applicable mapping coverage and interpretation note.</p>
+          </aside>
+
+          <section class="quick-report-stage" aria-live="polite">
+            <div id="qr-report-placeholder" class="quick-report-placeholder">
+              <div class="placeholder-icon" aria-hidden="true">📄</div>
+              <h3>Your one-page report will appear here</h3>
+              <p>Use the controls to define the decision context, then select <strong>Generate one-page report</strong>.</p>
+            </div>
+            <div id="qr-report-output" hidden>
+              <div class="report-output-heading">
+                <div>
+                  <p class="section-kicker">GENERATED DECISION BRIEF</p>
+                  <h3 id="qr-report-status">CDBG-DR Funding Report</h3>
+                </div>
+                <div class="report-action-row">
+                  <button id="qr-download-png" class="action-button" type="button">Download report PNG</button>
+                  <button id="qr-print-pdf" class="action-button" type="button">Print / Save as PDF</button>
+                  <button id="qr-download-csv" class="action-button" type="button">Download report data CSV</button>
+                </div>
+              </div>
+              <div class="report-page-wrap">
+                <div id="qr-report-plot" class="report-plot" aria-label="Generated one-page CDBG-DR funding report"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section id="explore-view" class="mode-view" aria-label="Full Explore and Compare dashboard" hidden>
+      <section id="panel-grid" class="panel-grid" aria-label="Dashboard comparison panels"></section>
+
+      <section class="method-notes">
+        <p><strong>Data and export notes.</strong> Financial values are source-quarter transactions, so cumulative curves are chronological cumulative net sums and may decline when a reversal, correction, or deobligation occurs. Aggregate downloads contain summarized quarter-by-geography records, not raw financial rows.</p>
+        <p><strong>City/place data attribution.</strong> City/place coordinates and primary-county attributes are derived from the user-supplied SimpleMaps U.S. Cities database. Census cartographic boundary files provide state, county, and 2010 urban-area polygons.</p>
+        <p><strong>Static-site limitation.</strong> GitHub Pages is public static hosting. This edition intentionally performs all filtering, aggregation, report generation, and downloads in the visitor’s browser and cannot provide server-side authentication.</p>
+      </section>
     </section>
 
     <footer class="site-footer">

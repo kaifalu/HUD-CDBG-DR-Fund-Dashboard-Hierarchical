@@ -26,8 +26,7 @@ source-data license before redistributing that package publicly.
 
 ## Source HUD records
 
-The financial and narrative records are supplied project inputs. The static
-package publishes prepared analytical values and limited narrative excerpts.
+The HUD financial records are supplied project inputs. The static package publishes prepared aggregate analytical values and contains no narrative records.
 Users are responsible for confirming any program-specific data publication,
 privacy, and records-management requirements before making the repository
 public.
