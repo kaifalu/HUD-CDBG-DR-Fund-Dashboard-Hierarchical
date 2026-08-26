@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "checks": {
+    "required_interface_ids": 13,
+    "quick_report_is_default": true,
+    "schema_version": 2,
+    "row_chunks": 7,
+    "finance_rows": 128382,
+    "row_widths": [
+      25
+    ],
+    "nonfinite_financial_values": 0,
+    "geography_code_errors": 0,
+    "geography_assets": {
+      "state": {
+        "features": 56,
+        "missing_expected_ids": 0
+      },
+      "county": {
+        "features": 3233,
+        "missing_expected_ids": 0
+      },
+      "urban": {
+        "features": 3601,
+        "missing_expected_ids": 0
+      }
+    },
+    "node_syntax": {
+      "assets/app.js": true,
+      "data/bootstrap.js": true
+    },
+    "self_contained_html_bytes": 7142836,
+    "self_contained_packed_assets": 13,
+    "self_contained_asset_mismatches": [],
+    "self_contained_narrative_assets": [],
+    "files_over_90mb": [],
+    "package_file_count": 48,
+    "package_bytes": 29453362,
+    "index_sha256": "377105b593fc62032012f9a3ab9834f26ea0ca8ff7ed2596123c0f28d430eaa8",
+    "app_js_sha256": "3c9244010834539fd2a8fb0df1fb6ff3cd82399c51a0aa8e5a90426691599452"
+  }
+}

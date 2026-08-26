@@ -1,0 +1,25 @@
+{
+  "test_type": "raw financial CSV + geography crosswalk preparation and static rebuild",
+  "preparation": {
+    "dashboard_finance_rows": 128382,
+    "unique_activities": 16150,
+    "state_mapping_coverage_pct": 100.0,
+    "county_enhanced_row_coverage_pct": 65.68,
+    "city_matched_row_coverage_pct": 37.39,
+    "urban_area_row_coverage_pct": 29.69,
+    "processed_column_count": 53,
+    "duplicate_column_count": 0,
+    "narrative_like_columns": []
+  },
+  "static_rebuild": {
+    "ok": true,
+    "finance_rows": 128382,
+    "row_chunks": 7,
+    "row_widths": [
+      25
+    ],
+    "self_contained_packed_assets": 13,
+    "self_contained_asset_mismatches": []
+  },
+  "ok": true
+}

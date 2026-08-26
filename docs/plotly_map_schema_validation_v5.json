@@ -1,0 +1,13 @@
+{
+  "choroplethmap": [
+    {
+      "code": "invisible",
+      "container": "data",
+      "trace": 0,
+      "path": "",
+      "astr": "",
+      "msg": "Trace 0 got defaulted to be not visible"
+    }
+  ],
+  "scattermap": null
+}
