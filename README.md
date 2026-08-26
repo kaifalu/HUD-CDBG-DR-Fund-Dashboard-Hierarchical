@@ -2,6 +2,8 @@
 
 The **CDBG-DR Fund Dashboard** is a browser-only GitHub Pages application for exploring HUD Community Development Block Grant–Disaster Recovery financial activity. The revised edition removes all narrative data and adds a decision-oriented **Quick Report** mode that converts a few selections into a printable one-page funding brief.
 
+https://kaifalu.github.io/HUD-CDBG-DR-Fund-Dashboard-Hierarchical/
+
 The site runs entirely from static HTML, CSS, JavaScript, Plotly, and prepared financial/geographic assets. It does not require Python, Gradio, a database, Render, Hugging Face, or another application server after deployment.
 
 ## Main interaction modes
