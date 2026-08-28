@@ -1,0 +1,57 @@
+Activity Type,default_address_decision,default_classification_reason
+Acquisition - buyout of residential properties,redact,residential_or_household_sensitive
+Acquisition - general,redact,ambiguous_default_privacy_protection
+Acquisition of property for replacement housing,redact,residential_or_household_sensitive
+Acquisition of relocation properties,redact,residential_or_household_sensitive
+"Acquisition, construction,reconstruction of public facilities",retain,infrastructure_or_public_facility
+Administration,redact,ambiguous_default_privacy_protection
+Affordable Rental Housing,retain,multifamily_or_affordable_rental
+Capacity building for nonprofit or public entities,redact,ambiguous_default_privacy_protection
+Clearance and Demolition,redact,ambiguous_default_privacy_protection
+Code enforcement,redact,ambiguous_default_privacy_protection
+Compensation for disaster-related losses (Louisiana and Texas),redact,ambiguous_default_privacy_protection
+Construction of buildings for the general conduct of government,retain,infrastructure_or_public_facility
+Construction of new housing,redact,residential_or_household_sensitive
+Construction of new replacement housing,redact,residential_or_household_sensitive
+Construction/reconstruction of streets,retain,infrastructure_or_public_facility
+Construction/reconstruction of water lift stations,retain,infrastructure_or_public_facility
+Construction/reconstruction of water/sewer lines or systems,retain,infrastructure_or_public_facility
+Debris removal,redact,ambiguous_default_privacy_protection
+Dike/dam/stream-river bank repairs,retain,infrastructure_or_public_facility
+Disposition,redact,ambiguous_default_privacy_protection
+Econ. development or recovery activity that creates/retains jobs,redact,ambiguous_default_privacy_protection
+Economic Development Center (Virginia waiver only),retain,infrastructure_or_public_facility
+Electrical power system improvements,retain,infrastructure_or_public_facility
+Homeownership Assistance (with waiver only),redact,residential_or_household_sensitive
+Homeownership Assistance to low- and moderate-income,redact,residential_or_household_sensitive
+Housing incentives to encourage resettlement,redact,ambiguous_default_privacy_protection
+MIT - Buyout of Properties,redact,residential_or_household_sensitive
+MIT - Economic Development,redact,ambiguous_default_privacy_protection
+MIT - Planning and Capacity Building,redact,ambiguous_default_privacy_protection
+MIT - Public Facilities and Improvements-Covered Projects Only,retain,infrastructure_or_public_facility
+MIT - Public Facilities and Improvements-Non Covered Projects,retain,infrastructure_or_public_facility
+MIT - Public Services and Information,redact,ambiguous_default_privacy_protection
+MIT - Rehabilitation/reconstruction of residential structures,redact,residential_or_household_sensitive
+MIT - Residential New Construction,redact,ambiguous_default_privacy_protection
+NDR - Economic Value,redact,ambiguous_default_privacy_protection
+NDR - Environmental Value,redact,ambiguous_default_privacy_protection
+NDR - Long Term Commitment,redact,ambiguous_default_privacy_protection
+NDR - Resilience Value,redact,ambiguous_default_privacy_protection
+NDR - Social Value,redact,ambiguous_default_privacy_protection
+NDR - Supporting Leverage,redact,ambiguous_default_privacy_protection
+Payment for compensation and incentives (Louisiana only),redact,ambiguous_default_privacy_protection
+Payment for compensation for economic losses (WTC-only),redact,ambiguous_default_privacy_protection
+Payment for homeowner compensation (Mississippi only),redact,residential_or_household_sensitive
+Planning,redact,ambiguous_default_privacy_protection
+Privately owned utilities,retain,infrastructure_or_public_facility
+Public services,redact,ambiguous_default_privacy_protection
+Rehabilitation/reconstruction of a public improvement,retain,infrastructure_or_public_facility
+Rehabilitation/reconstruction of other non-residential structures,redact,residential_or_household_sensitive
+Rehabilitation/reconstruction of public facilities,retain,infrastructure_or_public_facility
+Rehabilitation/reconstruction of residential structures,redact,residential_or_household_sensitive
+Relocation payments and assistance,redact,residential_or_household_sensitive
+Rental Assistance (waiver only),redact,residential_or_household_sensitive
+Residential Location Incentive Grants - (Waiver only),redact,residential_or_household_sensitive
+Tourism (Waiver Only),redact,ambiguous_default_privacy_protection
+Travel and Tourism per 107-117 - (WTC only),redact,ambiguous_default_privacy_protection
+Windpool Mitigation (Mississippi only),redact,residential_or_household_sensitive

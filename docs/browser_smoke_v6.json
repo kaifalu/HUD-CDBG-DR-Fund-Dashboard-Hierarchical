@@ -1,0 +1,29 @@
+{
+  "title": "CDBG-DR Fund Dashboard",
+  "default_mode": "true",
+  "mode_order": [
+    "Explore & Compare",
+    "Quick Report"
+  ],
+  "panel_count": 2,
+  "explore_narrative_checkboxes": 2,
+  "intro_bold_count": 0,
+  "footer_present": true,
+  "footer_text": "CDBG-DR Fund Hierarchy Dashboard | Supported by U.S. HUD | Research \u00b7 Education \u00b7 Planning | Exploratory governmental CDBG-DR implementation capacity for disaster recovery programs | QUESTIONS OR FEEDBACK | Kaifa.Lu@ttu.edu | Kaifa Lu \u00b7 CECREH | Processed-data build: 8/7/2026, 7:07:57 PM",
+  "explore_narrative_rows": 40,
+  "explore_narrative_status": "Showing the 40 most recent narrative records out of 95,530 linked records. Address text has completed the public privacy-screening workflow.",
+  "explore_narrative_filter_changes_kpis": true,
+  "explore_filtered_records": "95,530",
+  "explore_csv_filename": "cdbg_dr_panel_1_aggregate_20260827_235818.csv",
+  "explore_csv_failure": null,
+  "quick_mode_active": "true",
+  "quick_report_svg_count": 3,
+  "quick_narrative_cards": 2,
+  "quick_narrative_items": 6,
+  "quick_report_status": "Comparison Report: All mapped geographies vs. All mapped geographies",
+  "quick_csv_filename": "cdbg_dr_comparison_decision_report_data_20260827_235826.csv",
+  "quick_csv_failure": null,
+  "console_errors": [],
+  "page_errors": [],
+  "console_messages": 0
+}

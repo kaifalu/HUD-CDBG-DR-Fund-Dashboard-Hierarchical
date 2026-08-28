@@ -1,0 +1,32 @@
+{
+  "workflow": "Automated activity-aware PII address screening for public narrative excerpts",
+  "input_narratives": 174200,
+  "narratives_with_detected_address_mentions": 1186,
+  "detected_address_mentions": 2228,
+  "retained_public_address_mentions": 1140,
+  "redacted_potential_single_family_address_mentions": 1088,
+  "address_pattern_counts": {
+    "anchored_suffixless": 144,
+    "directional_suffixless": 39,
+    "highway": 5,
+    "parcel": 36,
+    "shared_street_list": 7,
+    "street": 1997
+  },
+  "public_decision_counts": {
+    "redact_public": 1088,
+    "retain_public": 1140
+  },
+  "classification_counts_all_narratives": {
+    "ambiguous_default_privacy_protection": 43466,
+    "explicit_infrastructure_context": 3079,
+    "infrastructure_or_public_facility": 86345,
+    "multifamily_or_affordable_rental": 9526,
+    "residential_or_household_sensitive": 31784
+  },
+  "public_retained_marker": "[[PUBLIC_ADDRESS]]…[[/PUBLIC_ADDRESS]]",
+  "public_redaction_marker": "[REDACTED — POTENTIAL SINGLE-FAMILY ADDRESS]",
+  "privacy_note": "This is a conservative automated screening workflow, not a legal privacy determination. Retained addresses are limited to narratives classified as infrastructure/public-facility or clearly multifamily/rental contexts. Potential addresses in homeowner, single-family, buyout, rehabilitation, reconstruction, relocation, or ambiguous contexts are redacted.",
+  "input_sha256": "9a9b9db963ad234e59c8c6cbcf498ce9c4785fcfe7f6ce79a2fcc1188ab3d239",
+  "output_sha256": "a9b9f0a7c798263a97e0af7e5d24484e787840d545229d93aedf3bc8a8c7045c"
+}
