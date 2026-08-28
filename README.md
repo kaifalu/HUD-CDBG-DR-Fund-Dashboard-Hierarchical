@@ -1,5 +1,7 @@
 # CDBG-DR Fund Dashboard — Privacy-Screened Narratives Edition
 
+https://kaifalu.github.io/HUD-CDBG-DR-Fund-Dashboard-Hierarchical/
+
 The **CDBG-DR Fund Dashboard** is a browser-only GitHub Pages application for exploring U.S. Department of Housing and Urban Development Community Development Block Grant–Disaster Recovery financial activity. It combines quarter-level financial records, geographic matching, and privacy-screened Quarterly Performance Report (QPR) narrative excerpts in a static HTML/CSS/JavaScript site that requires no Python server after publication.
 
 ## Interaction modes
