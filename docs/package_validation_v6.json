@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "checks": {
+    "forbidden_public_files": [],
+    "required_interface_ids": 14,
+    "explore_first_and_default": true,
+    "intro_paragraph_bold_tags": 0,
+    "intro_card_count": 4,
+    "footer_missing_items": [],
+    "schema_version": 1,
+    "finance_rows": 128382,
+    "row_widths": [
+      27
+    ],
+    "narrative_flag_rows": 95530,
+    "narrative_id_rows": 95530,
+    "nonfinite_financial_values": 0,
+    "geography_code_errors": 0,
+    "row_chunks": 7,
+    "narrative_years": 24,
+    "narrative_chunks": 29,
+    "narrative_entries": 174200,
+    "narrative_duplicate_ids": 0,
+    "public_address_markers_in_excerpts": 999,
+    "redaction_markers_in_excerpts": 1037,
+    "geography_assets": {
+      "state": {
+        "features": 56,
+        "missing_expected_ids": 0
+      },
+      "county": {
+        "features": 3233,
+        "missing_expected_ids": 0
+      },
+      "urban": {
+        "features": 3601,
+        "missing_expected_ids": 0
+      }
+    },
+    "restricted_qa_rows_checked": 2228,
+    "same_narrative_redaction_leaks": [],
+    "privacy_summary": {
+      "input_narratives": 174200,
+      "detected_address_mentions": 2228,
+      "retained_public_address_mentions": 1140,
+      "redacted_potential_single_family_address_mentions": 1088
+    },
+    "node_syntax": {
+      "assets/app.js": true,
+      "data/bootstrap.js": true
+    },
+    "self_contained_html_bytes": 19596740,
+    "self_contained_packed_assets": 42,
+    "self_contained_packed_narrative_assets": 29,
+    "self_contained_asset_mismatches": [],
+    "files_over_90mb": [],
+    "package_file_count": 80,
+    "package_bytes": 86674155,
+    "index_sha256": "9201e0ee0a699720ae369c42fccede5b368f51e2ac04d308cf2d5beda9d265c9",
+    "app_js_sha256": "c7d263020a3480a9622ce9880465e541129f4f8d9a8e0806e2d0ee051a12e5ef"
+  }
+}
