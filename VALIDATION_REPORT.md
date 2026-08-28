@@ -1,66 +1,47 @@
-# Validation Report — Version 5
+# Validation Report — Version 6
 
-## Result
+## Overall result
 
-**PASS.** The revised GitHub Pages package contains the narrative-free financial/geographic dashboard, the Quick Report decision tool, the retained Explore & Compare mode, and a synchronized self-contained HTML edition.
+**PASS.** The GitHub Pages package, self-contained HTML, privacy-screened narrative assets, Quick Report, and Explore & Compare modes passed structural, data-integrity, privacy, JavaScript, and browser smoke tests.
 
-## Full-data static validation
+## Static package checks
 
-The package validator completed successfully with no errors or warnings:
-
-- 128,382 quarter-level financial rows were parsed from seven JavaScript chunks.
-- Every compact row contains exactly 25 values under schema version 2.
-- No nonfinite financial values were found.
-- No out-of-range state, county, city/place, or urban-area codes were found.
-- State, county, and urban-area assets contain all geographic IDs expected by the dashboard dictionaries.
+- 128,382 finance rows loaded from 7 compact row chunks.
+- Every finance row has the expected 27-value narrative-enabled schema.
+- 95,530 finance rows have exact-key linked narrative records.
+- 174,200 unique sanitized narrative excerpts loaded from 29 annual chunks covering 24 reporting years.
+- State, county, and urban-area geographic assets contain all expected IDs.
+- Financial values are finite and all geography codes are in range.
 - `assets/app.js` and `data/bootstrap.js` passed Node.js syntax checks.
-- No narrative directory, runtime narrative fields, narrative manifest, narrative identifiers, or narrative metadata are present.
-- No individual deployment file exceeds 90 MB.
+- No raw narrative CSV or restricted QA file is present in the public site.
+- No public-site file exceeds 90 MB.
 
-Machine-readable result: `docs/static_validation_v5.json`.
+## Privacy checks
 
-## Browser logic test using the complete financial dataset
+The final address sweep detected 2,228 address-like mentions across 1,186 narratives. It retained/highlighted 1,140 mentions in approved infrastructure/public-facility or clearly multifamily/rental contexts and redacted 1,088 potential single-family or ambiguous mentions.
 
-A headless Chromium test loaded all 128,382 rows while using a lightweight Plotly test double to isolate interface and calculation logic. It confirmed:
+The internal validator cross-referenced all 2,228 restricted QA decisions by narrative ID. No address marked `redact_public` remained in the corresponding public narrative excerpt. The public excerpts contain balanced retained-address markers and visible redaction placeholders. The restricted QA file is excluded from the public package.
 
-- Quick Report is the default visible mode.
-- Eight dataset-summary badges render.
-- State selection contains the national/all option plus the 40 mapped jurisdictions.
-- Single-area and comparison reports are generated.
-- The comparison test successfully evaluated Alabama versus Alaska.
-- Explore & Compare creates two panels, 14 hierarchical filter controls, 10 financial-measure checkboxes, and 12 KPI cards.
-- No narrative text or narrative controls appear in either mode.
-- No JavaScript console or page errors were recorded.
-- The 390-pixel mobile viewport had no horizontal page overflow.
+This automated check does not replace authorized human or legal privacy review.
 
-Machine-readable result: `docs/browser_logic_smoke_test_v5.json`.
+## Interface checks
 
-## Real Plotly rendering test
+- Explore & Compare appears first and opens by default.
+- Two comparison panels render successfully.
+- Both panel narrative-only checkboxes work and change the analytical population.
+- Linked narrative tables load 40 recent sanitized records on demand.
+- Quick Report supports single-area and comparison reports.
+- Quick Report narrative-only filtering works.
+- Comparison reports render narrative-linked indicators and six recent sanitized excerpts across the two scenarios.
+- Overview-card paragraph text contains no bold tags; headings remain emphasized.
+- The requested CDBG-DR/CECREH footer and email link are present.
+- Explore aggregate CSV and Quick Report CSV downloads completed successfully.
+- Browser testing recorded no JavaScript console errors or uncaught page errors.
 
-A second Chromium test used the bundled Plotly library and a 1,000-row representative financial subset. It successfully rendered the one-page Quick Report with multiple SVG layers, the expected report title, and no JavaScript errors. The test environment did not expose hardware-accelerated WebGL, so the dashboard's documented map fallback was used while the KPI, trend, ranking, takeaways, and report layout rendered normally.
+## Self-contained HTML checks
 
-Machine-readable result: `docs/browser_real_plotly_smoke_test_v5.json`.
+The standalone HTML embeds 42 compressed assets, including all 29 narrative chunks, 7 financial row chunks, Plotly, application code, metadata, and geographic assets. Every embedded asset matched its source file by SHA-256. The file has no external script or stylesheet dependency.
 
-Plotly schema validation also recognized the `scattermap` and `choroplethmap` trace types and the shared `map` subplot configuration. The empty choropleth validation produced only the expected warning that a trace without locations is invisible. See `docs/plotly_map_schema_validation_v5.json`.
+## Browser-test environment note
 
-## Self-contained HTML validation
-
-The standalone HTML contains 13 gzip-compressed embedded assets:
-
-- Plotly.js;
-- dashboard bootstrap metadata;
-- dashboard application code;
-- seven financial row chunks; and
-- three polygon geography assets.
-
-Every embedded asset was decompressed and compared with its source using SHA-256. All 13 matched. The standalone file contains no external script or stylesheet dependency and no narrative data asset.
-
-## Reproduction workflow validation
-
-`scripts/prepare_financial_geography.py` was executed against the supplied raw HUD financial CSV and the completed activity geography crosswalk. It produced 128,382 quarter-level rows, 53 uniquely named financial/geographic columns, 100.00% state coverage, 65.68% enhanced county coverage, 37.39% city/place coverage, and 29.69% urban-area coverage. No narrative-like columns were produced.
-
-The resulting processed file was then passed to `scripts/build_static_data.py`, which rebuilt seven browser row chunks under the 25-value schema. `scripts/build_self_contained.py` generated a 13-asset one-file edition, and the rebuilt site passed the static validator. Machine-readable result: `docs/preparation_rebuild_test_v5.json`.
-
-## Limitation of automated browser testing
-
-The validation environment cannot reproduce every end-user graphics driver or browser print dialog. The package therefore combines full-data structural checks, full-data browser logic checks, a real-Plotly rendering test, map-schema validation, and deterministic asset-integrity checks. Users should still verify the published URL in their target browser after GitHub Pages completes deployment.
+The headless validation browser had WebGL disabled, so the report map displayed the designed fallback notice. Funding plots, indicators, narratives, filters, CSV downloads, and report generation remained operational. In a current hardware-accelerated browser, the interactive map is available.

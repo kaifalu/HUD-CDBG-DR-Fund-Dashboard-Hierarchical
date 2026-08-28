@@ -33,22 +33,22 @@
       <div class="dashboard-introduction" aria-label="CDBG-DR Fund Dashboard description">
         <section class="intro-card intro-overview">
           <h2>Dashboard Overview</h2>
-          <p>The <strong>CDBG-DR Fund Dashboard</strong> is an interactive web-based platform for exploring <strong>HUD Community Development Block Grant–Disaster Recovery (CDBG-DR)</strong> programs across the United States. It covers CDBG-DR funding associated with disasters and appropriations from <strong>2001 to 2023</strong>, representing <strong>18 disaster/appropriation categories across 40 states and U.S. territories</strong>.</p>
+          <p>The CDBG-DR Fund Dashboard is an interactive web-based platform for exploring HUD Community Development Block Grant–Disaster Recovery (CDBG-DR) programs across the United States. It covers CDBG-DR funding associated with disasters and appropriations from 2001 to 2023, representing 18 disaster/appropriation categories across 40 states and U.S. territories.</p>
         </section>
 
         <section class="intro-card intro-functions">
           <h2>Data and Functions</h2>
-          <p>The dashboard integrates project- and activity-level financial information with geographic data. Users can create a simplified <strong>one-page decision report</strong>, apply <strong>seven hierarchical filters</strong>, compare two programs or locations, and explore recovery activities at the <strong>state, county, city/place, and urban-area levels</strong>.</p>
+          <p>The dashboard integrates project- and activity-level financial information, privacy-screened Quarterly Performance Report narratives, and geographic data. Users can apply seven hierarchical filters, compare programs or locations, explore recovery activities at the state, county, city/place, and urban-area levels, and generate a simplified one-page decision report.</p>
         </section>
 
         <section class="intro-card intro-analysis">
           <h2>Financial and Geographic Analysis</h2>
-          <p>Interactive visualizations allow users to examine quarterly and cumulative trends in obligated, expended, and disbursed CDBG-DR funds. Users can also download decision reports, aggregate data, maps, and funding figures for analysis, reporting, and presentation purposes.</p>
+          <p>Interactive visualizations allow users to examine quarterly and cumulative trends in obligated, expended, and disbursed CDBG-DR funds and review linked, privacy-screened implementation narratives. Users can also download decision reports, aggregate data, maps, and funding figures.</p>
         </section>
 
         <section class="intro-card intro-audiences">
           <h2>Audiences and Applications</h2>
-          <p>The dashboard is designed for <strong>researchers, government agencies, CDBG-DR grantees, planners, policymakers, nonprofit organizations, students, and community stakeholders</strong>. Potential applications include disaster-recovery monitoring, funding and expenditure analysis, geographic and equity assessment, comparative program evaluation, implementation research, and policy analysis.</p>
+          <p>The dashboard is designed for researchers, government agencies, CDBG-DR grantees, planners, policymakers, nonprofit organizations, students, and community stakeholders. Potential applications include disaster-recovery monitoring, funding and expenditure analysis, geographic and equity assessment, comparative program evaluation, implementation research, and policy analysis.</p>
         </section>
       </div>
 
@@ -58,23 +58,34 @@
     <div id="global-error" class="global-error" hidden></div>
 
     <nav class="mode-switcher" aria-label="Dashboard interaction mode">
-      <button id="mode-tab-quick" class="mode-tab active" type="button" data-mode="quick" aria-controls="quick-report-view" aria-selected="true">
-        <span class="mode-tab-title">Quick Report</span>
-        <span class="mode-tab-note">Turn a few choices into a one-page decision brief</span>
-      </button>
-      <button id="mode-tab-explore" class="mode-tab" type="button" data-mode="explore" aria-controls="explore-view" aria-selected="false">
+      <button id="mode-tab-explore" class="mode-tab active" type="button" data-mode="explore" aria-controls="explore-view" aria-selected="true">
         <span class="mode-tab-title">Explore &amp; Compare</span>
         <span class="mode-tab-note">Use the full seven-tier analytical dashboard</span>
       </button>
+      <button id="mode-tab-quick" class="mode-tab" type="button" data-mode="quick" aria-controls="quick-report-view" aria-selected="false">
+        <span class="mode-tab-title">Quick Report</span>
+        <span class="mode-tab-note">Turn a few choices into a one-page decision brief</span>
+      </button>
     </nav>
 
-    <section id="quick-report-view" class="mode-view" aria-label="Quick Report decision tool">
+    <section id="explore-view" class="mode-view" aria-label="Full Explore and Compare dashboard">
+      <section id="panel-grid" class="panel-grid" aria-label="Dashboard comparison panels"></section>
+
+      <section class="method-notes">
+        <p><strong>Data and export notes.</strong> Financial values are source-quarter transactions, so cumulative curves are chronological cumulative net sums and may decline when a reversal, correction, or deobligation occurs. Aggregate downloads contain summarized quarter-by-geography records, not raw financial rows.</p>
+        <p><strong>Narrative privacy notes.</strong> Narratives are linked by exact Grant + Activity Number + QPR quarter. Detected addresses in infrastructure/public-facility and clearly multifamily/rental contexts are retained and highlighted; potential addresses in buyout, homeowner, single-family rehabilitation or reconstruction, relocation, and ambiguous contexts are redacted before publication. Automated screening does not replace human or legal privacy review.</p>
+        <p><strong>City/place data attribution.</strong> City/place coordinates and primary-county attributes are derived from the user-supplied SimpleMaps U.S. Cities database. Census cartographic boundary files provide state, county, and 2010 urban-area polygons.</p>
+        <p><strong>Static-site limitation.</strong> GitHub Pages is public static hosting. This edition performs filtering, aggregation, narrative loading, report generation, and downloads in the visitor’s browser and cannot provide server-side authentication.</p>
+      </section>
+    </section>
+
+    <section id="quick-report-view" class="mode-view" aria-label="Quick Report decision tool" hidden>
       <div class="quick-report-shell">
         <header class="quick-report-heading">
           <div>
             <p class="section-kicker">DECISION-ORIENTED MODE</p>
             <h2>Generate a One-Page CDBG-DR Funding Report</h2>
-            <p>Choose a report type, geography, time horizon, and one financial measure. The dashboard will summarize the selection in a printable single-page report with key indicators, a map, funding trends, a top-five ranking, and rule-based takeaways.</p>
+            <p>Choose a report type, geography, time horizon, and one financial measure. The dashboard will summarize the selection in a printable single-page report with key indicators, a map, funding trends, a top-five ranking, rule-based takeaways, and recent privacy-screened narrative highlights.</p>
           </div>
           <span class="quick-report-badge">NO DATA ANALYSIS EXPERIENCE REQUIRED</span>
         </header>
@@ -112,6 +123,8 @@
                 </div>
               </div>
             </div>
+
+            <label class="quick-narrative-filter"><input id="qr-narrative-only" type="checkbox"><span><strong>Only include records with sanitized narratives</strong><small>Uses the exact Grant + Activity Number + QPR quarter link. Public excerpts have completed the address privacy screening described below.</small></span></label>
 
             <div class="quick-scenario-card scenario-a" id="qr-scenario-a-card">
               <div class="quick-scenario-title"><span>Scenario A</span><strong id="qr-a-caption">Primary selection</strong></div>
@@ -195,7 +208,7 @@
             <div id="qr-report-placeholder" class="quick-report-placeholder">
               <div class="placeholder-icon" aria-hidden="true">📄</div>
               <h3>Your one-page report will appear here</h3>
-              <p>Use the controls to define the decision context, then select <strong>Generate one-page report</strong>.</p>
+              <p>Use the controls to define the decision context, then select <strong>Generate one-page report</strong>. The report can include recent linked, privacy-screened narrative excerpts.</p>
             </div>
             <div id="qr-report-output" hidden>
               <div class="report-output-heading">
@@ -212,25 +225,34 @@
               <div class="report-page-wrap">
                 <div id="qr-report-plot" class="report-plot" aria-label="Generated one-page CDBG-DR funding report"></div>
               </div>
+              <section id="qr-narrative-section" class="quick-narrative-section" hidden>
+                <div class="quick-narrative-heading">
+                  <div><p class="section-kicker">PRIVACY-SCREENED IMPLEMENTATION CONTEXT</p><h4>Linked Narrative Highlights</h4></div>
+                  <p>Retained public infrastructure/multifamily addresses are highlighted. Potential single-family or ambiguous addresses appear as redacted placeholders.</p>
+                </div>
+                <div id="qr-narrative-columns" class="quick-narrative-columns"></div>
+              </section>
             </div>
           </section>
         </div>
       </div>
     </section>
 
-    <section id="explore-view" class="mode-view" aria-label="Full Explore and Compare dashboard" hidden>
-      <section id="panel-grid" class="panel-grid" aria-label="Dashboard comparison panels"></section>
-
-      <section class="method-notes">
-        <p><strong>Data and export notes.</strong> Financial values are source-quarter transactions, so cumulative curves are chronological cumulative net sums and may decline when a reversal, correction, or deobligation occurs. Aggregate downloads contain summarized quarter-by-geography records, not raw financial rows.</p>
-        <p><strong>City/place data attribution.</strong> City/place coordinates and primary-county attributes are derived from the user-supplied SimpleMaps U.S. Cities database. Census cartographic boundary files provide state, county, and 2010 urban-area polygons.</p>
-        <p><strong>Static-site limitation.</strong> GitHub Pages is public static hosting. This edition intentionally performs all filtering, aggregation, report generation, and downloads in the visitor’s browser and cannot provide server-side authentication.</p>
-      </section>
-    </section>
-
-    <footer class="site-footer">
-      <span id="build-stamp"></span>
-      <span>CDBG-DR Fund Dashboard · Browser-only GitHub Pages application</span>
+    <footer class="lab-footer">
+      <div class="footer-brand">
+        <strong>CDBG-DR Fund Hierarchy Dashboard</strong>
+        <span>Supported by U.S. HUD</span>
+      </div>
+      <div class="footer-focus">
+        <strong>Research · Education · Planning</strong>
+        <span>Exploratory governmental CDBG-DR implementation capacity for disaster recovery programs</span>
+      </div>
+      <div class="footer-contact">
+        <span class="footer-kicker">QUESTIONS OR FEEDBACK</span>
+        <a href="mailto:Kaifa.Lu@ttu.edu">Kaifa.Lu@ttu.edu</a>
+        <span>Kaifa Lu · CECREH</span>
+      </div>
+      <span id="build-stamp" class="footer-build-stamp"></span>
     </footer>
   </main>
 

@@ -1,79 +1,61 @@
 # Data and Methods
 
-## Financial source and analytical unit
+## Financial records
 
-The dashboard uses HUD CDBG-DR Quarterly Performance Report financial data by grant, project, activity, and reporting quarter. The source contains 130,605 rows. The browser dataset contains 128,382 quarter-level financial rows after excluding 2,223 summary records without a valid QPR reporting quarter.
+The dashboard uses 128,382 valid quarter-level HUD CDBG-DR financial records after excluding 2,223 summary rows without a usable QPR quarter. It contains 206 grants, 1,433 projects, and 16,150 Grant + Activity Number combinations. Five QPR measures are available: funds obligated, funds expended, grant disbursed, activity program income disbursed, and activity program income received.
 
-The five financial measures are:
+## Narrative linkage
 
-1. QPR Funds Obligated
-2. QPR Fund Expended
-3. QPR Grant Disbursed
-4. QPR Activity Program Income Disbursed
-5. QPR Activity Program Income Received
+The source narrative files were collapsed to 174,200 nonempty quarter-level narrative records. Narratives are linked to finance records by exact **Grant + Activity Number + QPR report quarter**. This produces 95,530 financial records with a linked narrative, or 74.41% of dashboard financial rows.
 
-Financial values are treated as source-quarter transactions. Cumulative values are chronological cumulative net sums and may decline after reversals, corrections, or deobligations.
+The static public site stores only excerpts, limited to 1,800 characters and partitioned by year for on-demand loading.
 
-## Narrative removal
+## Narrative PII address screening
 
-This edition intentionally contains **no narrative records or narrative functionality**. Narrative-only filtering, linked-narrative tables, narrative identifiers, narrative excerpts, narrative metadata, and narrative assets were removed from the interface, row schema, build workflow, validation workflow, downloads, and self-contained HTML.
+The address screening is performed before static assets are created. It detects common street, highway, P.O. box, rural-route, directional suffixless, parcel, and lot patterns. Each narrative is classified using its activity type, activity title, and narrative context. The classification applies only to narrative-address handling.
 
-## Hierarchical dimensions
+### Retain and highlight
 
-The seven analytical dimensions are:
+Detected addresses are retained when the narrative is classified as:
 
-- disaster/appropriation year;
-- disaster type;
-- grantee;
-- project;
-- activity responsible organization;
-- activity type; and
-- activity title.
+- infrastructure or public facility; or
+- clearly multifamily, public-housing, affordable-rental, or multi-unit development.
 
-Repeated labels are dictionary-encoded to reduce the size of the static website.
+The public text encloses these strings in `[[PUBLIC_ADDRESS]]…[[/PUBLIC_ADDRESS]]`, which the dashboard renders as highlighted text.
 
-## Geographic methods
+### Redact
 
-### State
+Detected addresses are replaced with `[REDACTED — POTENTIAL SINGLE-FAMILY ADDRESS]` when the narrative indicates:
 
-State is assigned directly from the source grantee-state field. Coverage is 100% of the browser financial rows.
+- buyout or property acquisition;
+- homeowner or owner-occupied assistance;
+- single-family/residential rehabilitation or reconstruction;
+- replacement housing or relocation; or
+- an ambiguous context without strong infrastructure or multifamily evidence.
 
-### County/county-equivalent
+Sensitive residential signals override otherwise safe cues. The original detected strings are written only to the restricted QA table and never to the public package.
 
-Enhanced county matching combines:
+### Public-screening results
 
-- direct county/county-equivalent evidence in grantee, project, organization, and activity text; and
-- the primary county listed for a conservatively matched city/place.
+| Measure | Count |
+|---|---:|
+| Nonempty narratives screened | 174,200 |
+| Narratives with detected address-like mentions | 1,186 |
+| Detected address-like mentions | 2,228 |
+| Retained/highlighted mentions | 1,140 |
+| Redacted mentions | 1,088 |
 
-County row coverage is 65.68%. A city-derived primary county is an approximation when a populated place spans more than one county.
+This automated procedure is conservative and is not a legal determination or guarantee that all PII has been identified. Public release should remain subject to institutional privacy review.
 
-### City/populated place
+## Geography
 
-City/place matching uses the supplied U.S. cities gazetteer and state-constrained text evidence. The interface displays matched points using latitude and longitude; it does not represent municipal-limit polygons. Row coverage is 37.39%.
+- **State:** direct assignment from grantee state.
+- **County/county-equivalent:** direct high-confidence county text plus city-derived primary-county approximation.
+- **City/place:** conservatively matched point from the supplied U.S. cities database; not a municipal polygon.
+- **Urban area:** 2010 Census urban-area geography linked through city point-in-polygon or supporting locality evidence.
 
-### 2010 Census urban area
+Mapping coverage is reported in the interface and downloads.
 
-Urban areas are a secondary Census statistical geography. Matching primarily associates a matched city point with an urban-area polygon, supplemented by conservative locality text. Row coverage is 29.69%.
+## Static deployment
 
-## Quick Report calculations
-
-For each scenario, the Quick Report:
-
-1. applies the selected time range and optional program filters;
-2. calculates mapping coverage before applying the selected geographic location;
-3. limits records to mapped features at the selected geographic level;
-4. calculates the chosen financial measure, unique grants, projects, and activities;
-5. builds a quarterly or cumulative series;
-6. aggregates the measure for the map;
-7. identifies the top five geographic units, projects, or activity types, depending on the selected scope; and
-8. generates concise takeaways using deterministic browser rules.
-
-For a comparison report, the map displays Scenario B minus Scenario A, while the trend and ranking display both scenarios. No external AI service is called.
-
-## Aggregate exports
-
-Quick Report CSV exports contain report settings, aggregate indicators, the aggregate time series, the top-five ranking, takeaways, and methodology notes. Explore & Compare downloads contain quarter-by-geography aggregates. Neither export contains raw source rows.
-
-## Static storage
-
-The GitHub Pages application stores compact financial rows in `data/rows/*.js`. State, county, and urban-area boundary assets load only when required. All calculations and exports run in the visitor's browser.
+The browser loads dictionary-encoded financial row chunks. Geographic boundaries load when requested. Sanitized narrative excerpts are split into annual JavaScript chunks and load on demand. All filtering, aggregation, mapping, reporting, narrative rendering, and downloads occur locally in the visitor's browser.

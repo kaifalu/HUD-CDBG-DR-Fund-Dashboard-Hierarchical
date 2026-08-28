@@ -1,88 +1,47 @@
 # CDBG-DR Fund Dashboard User Guide
 
-## 1. Choose an interaction mode
+## Explore & Compare
 
-The dashboard opens in **Quick Report** mode. Select **Explore & Compare** when you need the full two-panel analytical interface.
+The site opens in **Explore & Compare**. Panel 1 and Panel 2 operate independently, allowing side-by-side comparisons across years, disasters, grantees, projects, organizations, activity types, and activity titles.
 
-## 2. Quick Report
+For each panel:
 
-### Step 1 — Select report type
+1. Select any of the seven hierarchical filters.
+2. Optionally select **Only show records with sanitized narratives**.
+3. Choose state, enhanced county, city/place, or urban-area geography.
+4. Select a financial measure and quarterly or cumulative-net basis.
+5. Review the indicators, map, trend plot, and linked privacy-screened narratives.
+6. Download aggregate data, map PNG, or plot PNG.
 
-- **Single-area report** summarizes one geographic and program selection.
-- **Comparison report** compares Scenario A with Scenario B using the same geographic level and financial measure. The scenarios may differ by location, reporting period, disaster, grantee, project, or activity type.
+Open **Linked privacy-screened narrative records** to load recent excerpts. Highlighted addresses were retained only for infrastructure/public-facility or clearly multifamily/rental contexts. Red placeholders indicate potential single-family or ambiguous address information removed before publication.
 
-### Step 2 — Select shared settings
+## Quick Report
 
-Choose a geographic level, one financial measure, and a trend basis:
+Select **Quick Report** to generate a decision-oriented brief.
 
-- **Quarterly net** displays source-quarter transactions.
-- **Cumulative net** displays their chronological running total.
+1. Choose **Single-area report** or **Comparison report**.
+2. Select geographic level and one financial measure.
+3. Choose quarterly or cumulative-net trend basis.
+4. Optionally restrict the report to records with sanitized narratives.
+5. Define location and time horizon. Optional filters allow narrower disaster, grantee, project, and activity-type selections.
+6. Select **Generate one-page report**.
 
-Available measures are funds obligated, funds expended, grant disbursed, activity program income disbursed, and activity program income received.
+The report includes indicators, map, financial trend, top-five ranking, rule-based takeaways, and up to three recent privacy-screened narrative highlights per scenario. Use:
 
-### Step 3 — Define Scenario A
+- **Download report PNG** for an image;
+- **Print / Save as PDF** for a printable one-page brief;
+- **Download report data CSV** for the summarized report data and displayed sanitized excerpts.
 
-Choose a location and time horizon. Presets include all reporting periods and the latest one, three, or five years. Select **Custom QPR-quarter range** to set exact start and end quarters.
+## Narrative interpretation
 
-Open **More filters** to narrow the report by disaster/appropriation year, disaster type, grantee, project, or activity type. Project choices become available after a grantee is selected.
+Narratives are linked by exact Grant + Activity Number + QPR quarter. The narrative-only option therefore changes the analytical population to records with a nonempty linked and sanitized QPR narrative. The address screen applies only to narrative text; it does not alter activity type, financial amounts, or geographic classifications.
 
-### Step 4 — Define Scenario B when comparing
+Automated address screening can produce false positives or miss unusual address formats. Do not treat the public excerpts as a substitute for an authorized privacy review.
 
-Scenario B appears when **Comparison report** is selected. It uses Scenario A's time horizon by default. Clear **Use Scenario A time horizon** to define a different reporting period.
+## Financial interpretation
 
-### Step 5 — Generate and export
+Financial measures are source-quarter transactions. Cumulative plots are chronological cumulative net sums and may decline when the source records a correction, reversal, or deobligation.
 
-Select **Generate one-page report**. The generated decision brief includes:
+## Geographic interpretation
 
-- four summary indicators;
-- a map of the selected measure or the Scenario B minus Scenario A difference;
-- a quarterly or cumulative funding trend;
-- a top-five ranking;
-- up to four automatically generated, rule-based takeaways; and
-- financial and geographic interpretation notes.
-
-Exports:
-
-- **Download report PNG** creates a high-resolution image.
-- **Print / Save as PDF** opens a print-ready landscape page. Choose the browser's PDF destination.
-- **Download report data CSV** saves the aggregate report inputs, time series, ranking, takeaways, and methodology notes.
-
-## 3. Explore & Compare
-
-Each panel has independent controls. Select values in the following order:
-
-1. Year
-2. Disaster Type
-3. Grantee
-4. Project
-5. Activity Responsible Organization
-6. Activity Type
-7. Activity Title
-
-Downstream choices update after an upstream filter changes. Each panel also provides:
-
-- geographic level and geographic scope;
-- a map measure;
-- five selectable timeline measures;
-- quarterly or cumulative timeline basis;
-- dynamic indicators; and
-- aggregate CSV, map PNG, and timeline PNG downloads.
-
-The two panels do not force identical selections, allowing comparison across locations, disasters, grantees, projects, activities, and reporting periods.
-
-## 4. Geographic interpretation
-
-- **State** is assigned directly from the grantee state.
-- **County/county-equivalent** combines direct county evidence with city-derived primary-county assignments.
-- **City/place** is a matched point from the supplied cities database, not a municipal boundary.
-- **Urban area** uses the 2010 Census urban-area layer as a secondary analytical geography.
-
-Quick Reports display mapping coverage for the active nongeographic filters. Unmapped records are excluded from county, city/place, and urban-area maps and geographic totals.
-
-## 5. Empty or unexpected results
-
-A zero value may mean that no records match the combined filters or that source-quarter transactions net to zero. Broaden the location, time horizon, or optional filters. For county, city/place, and urban-area analysis, also review the displayed mapping coverage.
-
-## 6. Browser recommendations
-
-Use a current Chrome, Edge, Firefox, or Safari browser with JavaScript and hardware acceleration enabled. The first visit loads the prepared financial data into browser memory and may take several seconds.
+State assignment is direct. Enhanced county results combine direct county evidence with a matched city/place's primary county. City/place results are matched points, not municipal boundary polygons. Urban areas use 2010 Census urban-area polygons. Reports display applicable mapping coverage.

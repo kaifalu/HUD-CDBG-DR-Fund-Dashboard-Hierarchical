@@ -1,32 +1,17 @@
-# Third-party notices
+# Third-Party Notices
 
 ## Plotly.js
 
-The dashboard bundles Plotly.js locally to avoid a runtime content-delivery
-network dependency. Plotly.js is distributed under the MIT License. See
-`assets/vendor/PLOTLY_LICENSE.txt`.
+Plotly.js is bundled locally and distributed under its applicable open-source license.
 
-## U.S. Census Bureau cartographic boundaries
+## U.S. Census Bureau geographic files
 
-State, county/county-equivalent, and 2010 Census urban-area geometries derive
-from the user-supplied Census cartographic boundary files. The application
-preserves the urban-area layer's actual meaning and does not represent it as
-municipal city limits.
+State, county/county-equivalent, and 2010 urban-area cartographic boundaries are derived from U.S. Census Bureau files.
 
-## U.S. cities/place data
+## U.S. cities data
 
-City/place coordinates and primary-county attributes derive from the
-user-supplied SimpleMaps U.S. Cities file. Visible SimpleMaps attribution is
-retained in the application. Licensing for redistribution of the original raw
-cities file is governed by the license associated with that supplied dataset.
-The GitHub Pages deployment package contains only matched output attributes and
-not the full raw city CSV. The complete reproduction package includes the raw
-input solely because it was supplied for reproduction; review the applicable
-source-data license before redistributing that package publicly.
+City/place coordinates and primary-county attributes are derived from the user-supplied SimpleMaps U.S. Cities database. The dashboard retains visible SimpleMaps attribution. Review the applicable source-data license before redistributing the raw cities file.
 
-## Source HUD records
+## HUD data and narratives
 
-The HUD financial records are supplied project inputs. The static package publishes prepared aggregate analytical values and contains no narrative records.
-Users are responsible for confirming any program-specific data publication,
-privacy, and records-management requirements before making the repository
-public.
+HUD CDBG-DR financial and QPR narrative records are project inputs. The public site contains prepared financial/geographic assets and privacy-screened narrative excerpts. Original unsanitized narratives and the restricted address QA table are excluded from the public package.

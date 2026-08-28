@@ -1,90 +1,43 @@
-# CDBG-DR Fund Dashboard — Quick Report and Explore Edition
+# CDBG-DR Fund Dashboard — Privacy-Screened Narratives Edition
 
-The **CDBG-DR Fund Dashboard** is a browser-only GitHub Pages application for exploring HUD Community Development Block Grant–Disaster Recovery financial activity. The revised edition removes all narrative data and adds a decision-oriented **Quick Report** mode that converts a few selections into a printable one-page funding brief.
+The **CDBG-DR Fund Dashboard** is a browser-only GitHub Pages application for exploring U.S. Department of Housing and Urban Development Community Development Block Grant–Disaster Recovery financial activity. It combines quarter-level financial records, geographic matching, and privacy-screened Quarterly Performance Report (QPR) narrative excerpts in a static HTML/CSS/JavaScript site that requires no Python server after publication.
 
-https://kaifalu.github.io/HUD-CDBG-DR-Fund-Dashboard-Hierarchical/
+## Interaction modes
 
-The site runs entirely from static HTML, CSS, JavaScript, Plotly, and prepared financial/geographic assets. It does not require Python, Gradio, a database, Render, Hugging Face, or another application server after deployment.
+The dashboard opens in **Explore & Compare**, which retains two independent analytical panels, seven linked filters, maps, financial timelines, aggregate downloads, a narrative-only checkbox, and linked privacy-screened narrative records.
 
-## Main interaction modes
+**Quick Report** provides a simpler path for time-constrained or less data-literate users. A user chooses report type, geography, time horizon, one financial measure, and optional filters; the dashboard produces a printable one-page decision brief with indicators, map, funding trend, top-five ranking, rule-based takeaways, and recent privacy-screened narrative highlights. Reports can be printed/saved as PDF and downloaded as PNG or CSV.
 
-### Quick Report
+## Narrative privacy workflow
 
-Quick Report is the default landing mode. A user selects:
+Narratives are linked to financial records by exact **Grant + Activity Number + QPR quarter**. Before publication, an automated address sweep applies activity-aware rules only to the narrative text:
 
-- report type: single area or two-scenario comparison;
-- geography: state, county/county-equivalent, city/place, or 2010 Census urban area;
-- one financial measure;
-- quarterly or cumulative trend basis;
-- time horizon; and
-- optional disaster year, disaster type, grantee, project, and activity-type filters.
+- addresses in infrastructure/public-facility and clearly multifamily or affordable-rental contexts are retained and highlighted;
+- potential addresses in buyout, homeowner assistance, single-family rehabilitation or reconstruction, replacement/relocation housing, and ambiguous contexts are replaced with `[REDACTED — POTENTIAL SINGLE-FAMILY ADDRESS]`;
+- the financial and geographic datasets are not reclassified or filtered by these privacy labels.
 
-The browser generates a one-page decision brief containing four key indicators, a geographic map, a funding trend, a top-five ranking, rule-based takeaways, mapping-coverage information, and interpretation notes. The report can be downloaded as PNG, printed/saved as PDF, or exported as aggregate CSV.
+The public package contains only sanitized narrative excerpts and aggregate privacy-audit statistics. Original detected strings are stored only in a separate restricted QA file that must not be uploaded to a public repository. Automated screening is conservative and does not replace human or legal privacy review.
 
-### Explore & Compare
+### Privacy-screening results in this build
 
-The original analytical dashboard remains available as a second mode. It contains two independently controlled panels, seven hierarchical filters, four geographic levels, five financial measures, quarterly/cumulative timelines, interactive maps, and aggregate downloads.
+- 174,200 nonempty linked narrative records screened
+- 1,186 narratives with detected address-like mentions
+- 2,228 address-like mentions detected
+- 1,140 mentions retained and highlighted in approved infrastructure/multifamily contexts
+- 1,088 potential single-family or ambiguous mentions redacted
 
-## GitHub Pages deployment
+See `privacy/NARRATIVE_PRIVACY_METHOD.md` and `privacy/narrative_activity_privacy_crosswalk.csv`.
 
-1. Extract the deployment ZIP.
-2. Upload the **contents inside the extracted folder** to the root of a public GitHub repository.
-3. Confirm that `index.html`, `.nojekyll`, `assets/`, and `data/` are directly visible at the repository root.
-4. Open the repository's **Settings → Pages** page.
-5. Under **Build and deployment**, select:
-   - Source: `Deploy from a branch`
-   - Branch: `main`
-   - Folder: `/(root)`
-6. Select **Save**.
+## Core functions
 
-For a repository named `HUD-CDBG-DR-Fund-Dashboard-Hierarchical`, the project-site pattern is:
-
-```text
-https://YOUR_GITHUB_USERNAME.github.io/HUD-CDBG-DR-Fund-Dashboard-Hierarchical/
-```
-
-## Required root structure
-
-```text
-index.html
-.nojekyll
-assets/
-data/
-docs/
-scripts/
-README.md
-GITHUB_PAGES_SETUP.md
-USER_GUIDE.md
-DATA_METHODS.md
-VALIDATION_REPORT.md
-```
-
-Do not upload only the ZIP file or an enclosing folder. GitHub Pages must be able to find `index.html` at the selected publishing root.
-
-## Local preview
-
-A local HTTP server is recommended because the multi-file edition loads data assets dynamically.
-
-### Windows
-
-Double-click `run_local.bat`, then open:
-
-```text
-http://127.0.0.1:8000/
-```
-
-### macOS or Linux
-
-```bash
-chmod +x run_local.sh
-./run_local.sh
-```
-
-Alternatively:
-
-```bash
-python -m http.server 8000
-```
+- Two-panel Explore & Compare workspace, shown first by default.
+- Seven hierarchical filters: year, disaster type, grantee, project, responsible organization, activity type, and activity title.
+- Narrative-only filtering and linked privacy-screened QPR excerpts.
+- State, enhanced county/county-equivalent, matched city/place point, and 2010 Census urban-area views.
+- Five quarterly financial measures with quarterly or cumulative-net plots.
+- Single-area and comparison Quick Reports.
+- Aggregate CSV, map PNG, plot PNG, report PNG, and report-data CSV downloads.
+- Responsive layout and lab footer/contact information.
 
 ## Data coverage
 
@@ -95,51 +48,52 @@ python -m http.server 8000
 | City/populated place, matched point | 48,006 | 37.39% | 6,375 | 39.47% |
 | 2010 Census urban area | 38,121 | 29.69% | 5,062 | 31.34% |
 
-County coverage combines direct county evidence with the primary county associated with a conservatively matched city/place. City-derived county assignments are approximations when a place spans more than one county. City/place locations are points, not municipal boundary polygons.
+County and city/place assignments include inferred matches. The dashboard reports mapping coverage and interpretation notes for every selection.
 
-## Financial interpretation
+## GitHub Pages deployment
 
-The dashboard uses source-quarter financial transactions. Quarterly views display each quarter's net amount. Cumulative views calculate chronological cumulative net sums; a cumulative line may decline when a source record contains a reversal, correction, or deobligation.
+Upload the **contents of this folder** to the repository root so that `index.html`, `.nojekyll`, `assets/`, and `data/` are directly visible. Then configure:
 
-## Rebuilding the static data
-
-The complete source package includes a two-step workflow. First, `scripts/prepare_financial_geography.py` joins the raw HUD financial CSV to the prepared activity geography crosswalk. Then `scripts/build_static_data.py` creates the compact browser assets. No narrative file is required.
-
-```bash
-python scripts/prepare_financial_geography.py \
-  --financial-csv PATH/TO/F31_FINANCIAL.csv \
-  --geography-crosswalk PATH/TO/activity_geography_crosswalk.csv.gz \
-  --output-dir PATH/TO/PROCESSED_DATA
-
-python scripts/build_static_data.py \
-  --processed-dir PATH/TO/PROCESSED_DATA \
-  --site-dir .
-
-python scripts/build_self_contained.py --site-dir .
+```text
+Repository → Settings → Pages
+Source: Deploy from a branch
+Branch: main
+Folder: /(root)
 ```
 
-See `DATA_METHODS.md` and `data/STATIC_DATA_SCHEMA.md` for required fields and storage details.
+For the repository `kaifalu/HUD-CDBG-DR-Fund-Dashboard-Hierarchical`, the expected project URL is:
 
-## Validation
-
-Run:
-
-```bash
-python scripts/validate_static_package.py
+```text
+https://kaifalu.github.io/HUD-CDBG-DR-Fund-Dashboard-Hierarchical/
 ```
 
-The validator checks required files, dashboard controls, row schemas, row totals, geographic assets, absence of narrative assets, JavaScript syntax when Node.js is available, file-size limits, and package checksums.
+## Local preview
+
+A local HTTP server is recommended for the multi-file edition:
+
+```bash
+python -m http.server 8000
+```
+
+Then open `http://127.0.0.1:8000/`. The included self-contained HTML can also be opened directly.
+
+## Rebuilding
+
+1. Run `scripts/sanitize_narratives.py` in a restricted environment against the internally held processed narrative input. Never place unsanitized narrative files or restricted QA output in a public repository.
+2. Place the sanitized `narratives_processed.csv.gz` beside `finance_processed.csv.gz`, `metadata.json`, and geographic files in a processed-data directory.
+3. Run:
+
+```bash
+python scripts/build_static_data.py --processed-dir PATH/TO/PROCESSED --site-dir .
+python scripts/build_self_contained.py --site-dir . --output HUD-CDBG-DR-Fund-Dashboard-Hierarchical.html
+python scripts/validate_static_package.py --site-dir .
+```
 
 ## Documentation
 
-- `GITHUB_PAGES_SETUP.md` — publishing and troubleshooting instructions.
-- `USER_GUIDE.md` — Quick Report and Explore & Compare instructions.
-- `DATA_METHODS.md` — financial and geographic methodology.
-- `VALIDATION_REPORT.md` — completed validation results and limitations.
-- `PACKAGE_MANIFEST.md` — intended use of each package component.
-- `REVISION_NOTES_V5.md` — changes in this edition.
-- `THIRD_PARTY_NOTICES.md` — Plotly, Census, and city-data notices.
-
-## License and attribution
-
-Dashboard source code is provided under the MIT License. Plotly.js is bundled under its own MIT License. City/place coordinates and primary-county attributes are derived from the user-supplied SimpleMaps U.S. Cities database; visible attribution is retained. Review `NOTICE.md` and `THIRD_PARTY_NOTICES.md` before redistributing source geographic data.
+- `USER_GUIDE.md` — dashboard operation and report downloads.
+- `DATA_METHODS.md` — data, linkage, geography, and privacy methods.
+- `GITHUB_PAGES_SETUP.md` — deployment and troubleshooting.
+- `REVISION_NOTES_V6.md` — changes in this release.
+- `VALIDATION_REPORT.md` — completed package and browser checks.
+- `privacy/` — public privacy methodology, summary, and activity crosswalk.

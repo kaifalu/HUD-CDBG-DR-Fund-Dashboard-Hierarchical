@@ -1,37 +1,32 @@
-# Package Manifest
+# Public Package Manifest
 
-## GitHub Pages deployment package
+## Runtime files
 
-This is the package intended for a public GitHub repository.
+- `index.html` — GitHub Pages entry point.
+- `.nojekyll` — disables Jekyll processing.
+- `assets/app.css` — responsive interface and print styles.
+- `assets/app.js` — filters, maps, reports, narrative rendering, and downloads.
+- `assets/vendor/plotly-3.3.1.min.js` — bundled Plotly runtime.
+- `data/bootstrap.js` — dictionaries, metadata, manifests, and runtime schema.
+- `data/rows/*.js` — compact 27-field financial/geographic rows including linked-narrative flags/IDs.
+- `data/narratives/*.js` — year-partitioned privacy-screened public narrative excerpts.
+- `data/geography/*.js` — state, county, and urban-area geographic assets.
+- `privacy/` — public privacy method, summary, and activity-type decision crosswalk.
+- `HUD-CDBG-DR-Fund-Dashboard-Hierarchical.html` — self-contained edition.
 
-- `index.html` — application structure, dashboard description, Quick Report controls, and Explore & Compare container.
-- `.nojekyll` — prevents Jekyll processing.
-- `assets/app.css` — responsive interface and print styling.
-- `assets/app.js` — financial filtering, aggregation, Quick Report generation, maps, plots, and downloads.
-- `assets/vendor/plotly-3.3.1.min.js` — bundled visualization library.
-- `data/bootstrap.js` — dictionaries, metadata, column positions, chunk manifests, and geography metadata.
-- `data/rows/*.js` — compact quarter-level financial rows with no narrative fields.
-- `data/geography/*.js` — state, county, and urban-area map assets.
-- `HUD-CDBG-DR-Fund-Dashboard-Hierarchical.html` — optional fully self-contained one-file edition.
-- `scripts/prepare_financial_geography.py` — joins the raw financial CSV to the prepared activity geography crosswalk and creates the processed financial file.
-- `scripts/build_static_data.py` — rebuilds static assets from processed financial/geographic data.
-- `scripts/build_self_contained.py` — rebuilds the one-file HTML edition.
-- `scripts/validate_static_package.py` — validates package structure and data integrity.
-- `docs/` — previews and machine-readable validation outputs.
-- Markdown files — setup, operation, methods, notices, and revision documentation.
+## Reproducibility scripts
 
-## Complete reproduction package
+- `scripts/sanitize_narratives.py`
+- `scripts/build_static_data.py`
+- `scripts/build_self_contained.py`
+- `scripts/prepare_financial_geography.py`
+- `scripts/validate_static_package.py`
 
-The complete package contains:
+## Files deliberately excluded from the public package
 
-- the full GitHub Pages deployment website;
-- non-narrative source inputs used for financial and geographic processing;
-- processed non-narrative financial and geographic reference files;
-- geographic matching quality-assurance outputs when available; and
-- build, validation, documentation, and checksum files.
+- original unsanitized narrative CSV files;
+- restricted address QA table containing original detected strings;
+- server-side databases and credentials;
+- raw financial rows as a browser-download option.
 
-The complete package is for controlled reproduction and should not automatically be uploaded to a public repository. Review source-data licenses and redistribution requirements first.
-
-## Files intentionally excluded
-
-This edition excludes all QPR narrative CSV files, processed narrative tables, narrative databases, narrative JavaScript chunks, narrative identifiers, and narrative excerpts.
+The restricted QA deliverable must remain controlled and must not be copied into the GitHub Pages repository.
